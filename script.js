@@ -27,30 +27,36 @@ function writePassword() {
 // Function for generating password
 function generatePassword() {
   
-  // Prompts for the length of the password until the user inputs the number between 8 and 128
   var notValidInput = true;
   var lengthOfPassword;
   var generatedPassword = [];
 
+  // Prompts for the length of the password until the user inputs the number between 8 and 128
   while (notValidInput) {
     lengthOfPassword = prompt("How many characters do you need for your character?\nEnter between 8 and 128");
     notValidInput = (lengthOfPassword < 8 ) || (lengthOfPassword > 128);
   }
 
+  // Take inputs from a user to confirm the character types for the desired password
   wantNumeric = confirm("Do you want to include a number?");
   wantSpecialCharacter = confirm("Do you want to include a special character?");
   wantLowerCase = confirm("Do you want to include a lower case alphabet?");
   wantUpperCase = confirm("Do you want to include a upper case alphabet?");
 
+  // call getConfirm function
   var passwordOptions = getConfirm(wantNumeric, wantSpecialCharacter, wantLowerCase, wantUpperCase);
 
+  // Run "for-loop" for the length of the password that is going to be generated, 
+  // and pick random element from the "passwordOptions", and put it back to "generatedPassword" to stack an element of a password.
   for (var i=0; i<lengthOfPassword; i++) {
     var randomNum = Math.floor(Math.random() * passwordOptions.length);
     generatedPassword.push(passwordOptions[randomNum]);
   }
+  // Once the password is successfully generated, alert the user that the password is generated!
   alert("Successfully generated a strong password!");
 
-  return generatedPassword.join("");
+  // .join does removing double quotes from an each element of the array, and make it as a single string
+  return generatedPassword.join(""); 
 }
 
 // Function for getting confirmation from the user
